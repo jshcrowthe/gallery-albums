@@ -27,7 +27,7 @@ Example:
   <link rel="import" type="css" href="gallery-albums.css">
   <template>
     <ul>
-      <iron-selector attr-for-selected='data-uid' selected='{{_selected}}' selectable='.items-view' on-selected-changed='_broadcastChange'>
+      <iron-selector id='selector' attr-for-selected='data-uid' selectable='.items-view' on-selected-changed='_handleSelectChange'>
         <li class='horizontal center justified items-view' data-uid='my-memories'>
           <i class='album-icon my-memories-icon'></i>
           <span>My Memories</span>
@@ -58,27 +58,28 @@ Example:
       // USER INPUTS
       albums: {
         type: Array,
-        value: function() { 
-          var data = sessionStorage.getItem('gallery-albums-albums');
-          if (data) data = JSON.parse(data);
-          return data || [];
-        },
-        observer: '_cacheAlbums'
+        value: function() { return [] }
       },
       _selected: {
         type: String,
-        value: function() {
-          var data = sessionStorage.getItem('gallery-albums-selected');
-          return data || 'my-memories';
-        },
-        observer: '_cacheSelected'
+        value: 'my-memories',
       },
       count: {
         type: Number,
         value: 0
       }
     },
-    _broadcastChange: function(e) {
+    get _selectedCache() {
+      return sessionStorage.getItem('gallery-albums-selected');
+    },
+    // Checking cache in `attached` callback as any parent listeners
+    // will not be registered in time to handle this if fired in `ready`
+    attached: function() {
+      if (this._selectedCache) {
+        this.$.selector.select(this._selectedCache);
+      }
+    },
+    _handleSelectChange: function(e) {
       if (!e || !e.detail || !e.detail.value) return;
       var val = e.detail.value;
       if (val === 'my-memories') {
@@ -88,13 +89,8 @@ Example:
           albumId: val
         });
       }
-    },
-    _cacheAlbums: function(val) {
-      sessionStorage.setItem('gallery-albums-albums', JSON.stringify(val));
-    },
-    _cacheSelected: function(val) {
       sessionStorage.setItem('gallery-albums-selected', val);
-    }
+    },
   });
 })();
 </script>
