@@ -27,7 +27,7 @@ Example:
   <link rel="import" type="css" href="gallery-albums.css">
   <template>
     <ul>
-      <iron-selector attr-for-selected='data-uid' selectable='.items-view' on-selected-changed='_broadcastChange'>
+      <iron-selector attr-for-selected='data-uid' selected='{{_selected}}' selectable='.items-view' on-selected-changed='_broadcastChange'>
         <li class='horizontal center justified items-view' data-uid='my-memories'>
           <i class='album-icon my-memories-icon'></i>
           <span>My Memories</span>
@@ -58,7 +58,20 @@ Example:
       // USER INPUTS
       albums: {
         type: Array,
-        value: function() { return []; }
+        value: function() { 
+          var data = sessionStorage.getItem('gallery-albums-albums');
+          if (data) data = JSON.parse(data);
+          return data || [];
+        },
+        observer: '_cacheAlbums'
+      },
+      _selected: {
+        type: String,
+        value: function() {
+          var data = sessionStorage.getItem('gallery-albums-selected');
+          return data || 'my-memories';
+        },
+        observer: '_cacheSelected'
       },
       count: {
         type: Number,
@@ -75,6 +88,12 @@ Example:
           albumId: val
         });
       }
+    },
+    _cacheAlbums: function(val) {
+      sessionStorage.setItem('gallery-albums-albums', JSON.stringify(val));
+    },
+    _cacheSelected: function(val) {
+      sessionStorage.setItem('gallery-albums-selected', val);
     }
   });
 })();
