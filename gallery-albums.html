@@ -69,16 +69,6 @@ Example:
         value: 0
       }
     },
-    get _selectedCache() {
-      return sessionStorage.getItem('gallery-albums-selected');
-    },
-    // Checking cache in `attached` callback as any parent listeners
-    // will not be registered in time to handle this if fired in `ready`
-    attached: function() {
-      if (this._selectedCache) {
-        this.$.selector.select(this._selectedCache);
-      }
-    },
     _handleSelectChange: function(e) {
       if (!e || !e.detail || !e.detail.value) return;
       var val = e.detail.value;
@@ -89,7 +79,6 @@ Example:
           albumId: val
         });
       }
-      sessionStorage.setItem('gallery-albums-selected', val);
     },
   });
 })();
