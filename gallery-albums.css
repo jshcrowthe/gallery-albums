@@ -1,6 +1,9 @@
 :host {
   display: inline-block;
   width:200px;
+  height:100%;
+  --album-border-style: 1px solid #d2d2d2;
+  border-right: var(--album-border-style);
 }
 
 ul {
@@ -13,8 +16,14 @@ li:hover {
   cursor: pointer;
 }
 
-h1 {
+.add-album {
+  margin: -5px;
+  padding: 10px;
+  background: #f4f4f4;
+}
 
+input.album-title-input {
+  margin-bottom: 5px;
 }
 
 .album-icon {
@@ -29,7 +38,12 @@ h1 {
 }
 
 .albums-divider {
-  margin:10px 0 0;
+  margin:15px 0 0;
+}
+
+.close-button {
+  float:right;
+  margin: 0 0 5px;
 }
 
 .fs-badge {
@@ -48,8 +62,14 @@ h1 {
   text-shadow: none;
 }
 
-.items-view {
+li {
   padding: 5px;
+  border-bottom: var(--album-border-style);
+}
+
+li:first-child,
+li.first-item {
+  border-top: var(--album-border-style);
 }
 
 .iron-selected .fs-badge {
