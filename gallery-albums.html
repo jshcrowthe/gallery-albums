@@ -50,10 +50,10 @@ Example:
         <li class='layout horizontal center' hidden='[[!_addingAlbum]]'>
           <div class='add-album'>
             <button id='closeButton' class='close-button' is='fs-button' option='close' on-tap='_toggleAddAlbum'>close</button>
-            <input id='titleInput' class='album-title-input' type="text" value='{{_newAlbum.title::input}}' maxlength$='[[_titleMaxlength]]'>
+            <input id='titleInput' class='album-title-input' type="text" value='{{_newAlbum.name::input}}' maxlength$='[[_nameMaxLength]]'>
             <div class="layout horizontal center justified">
               <button id='saveButton' is='fs-button' option='recommended' disabled>Save</button>
-              <span>[[_charsRemaining(_newAlbum.title)]]</span>
+              <span>[[_charsRemaining(_newAlbum.name)]]</span>
             </div>
           </div>
         </li>
@@ -89,7 +89,7 @@ Example:
         type: Object,
         value: function() { return {}; }
       },
-      _titleMaxlength: {
+      _nameMaxLength: {
         type: Number,
         value: 200
       },
@@ -105,11 +105,11 @@ Example:
       }
     },
     observers: [
-      '_computeButtonState(_newAlbum.title)'
+      '_computeButtonState(_newAlbum.name)'
     ],
     _charsRemaining: function(title) {
-      if (!title) return this._titleMaxlength;
-      return this._titleMaxlength - title.length;
+      if (!title) return this._nameMaxLength;
+      return this._nameMaxLength - title.length;
     },
     _computeButtonState: function(title) {
       this.toggleAttribute('disabled', !(title && title.length), this.$.saveButton);
