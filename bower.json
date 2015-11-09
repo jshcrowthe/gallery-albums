@@ -18,7 +18,7 @@
     "/test/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.1.0",
+    "polymer": "Polymer/polymer#^1.2.0",
     "layout": "Polymer/layout",
     "fs-styles": "fs-webdev/fs-styles#~1.8.0",
     "fs-button": "jshcrowthe/fs-button"
@@ -28,6 +28,6 @@
     "web-component-tester": "*"
   },
   "resolutions": {
-    "polymer": "^1.0.0"
+    "polymer": "^1.2.0"
   }
 }
