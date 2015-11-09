@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../iron-selector/iron-selector.html">
 <link rel="import" href="../layout/layout.html">
 <link rel="import" href="../fs-styles/fs-styles.html">
+<link rel="import" href="../fs-button/fs-button.html">
 
 <!--
 An element providing a solution to no problem in particular.
@@ -37,10 +38,24 @@ Example:
           </div>
           <span class='fs-badge'>[[count]]</span>
         </li>
-        <h5 class='albums-divider'>Albums</h5>
-        <li class='layout horizontal center items-view'>
-          <i class="album-icon add-folder-icon"></i>
-          <span>New Album</span>
+        <li>
+          <h5 class='albums-divider'>Albums</h5>
+        </li>
+        <li class='layout horizontal center add-item-toggle' on-tap='_toggleAddAlbum' hidden='[[_addingAlbum]]'>
+          <div class="layout horizontal center">
+            <i class="album-icon add-folder-icon"></i>
+            <span>New Album</span>
+          </div>
+        </li>
+        <li class='layout horizontal center' hidden='[[!_addingAlbum]]'>
+          <div class='add-album'>
+            <button id='closeButton' class='close-button' is='fs-button' option='close' on-tap='_toggleAddAlbum'>close</button>
+            <input id='titleInput' class='album-title-input' type="text" value='{{_newAlbum.title::input}}' maxlength$='[[_titleMaxlength]]'>
+            <div class="layout horizontal center justified">
+              <button id='saveButton' is='fs-button' option='recommended' disabled>Save</button>
+              <span>[[_charsRemaining(_newAlbum.title)]]</span>
+            </div>
+          </div>
         </li>
         <template is='dom-repeat' items='{{albums}}' as='album'>
           <li class='layout horizontal center justified items-view' data-uid$='[[album.id]]'>
@@ -61,19 +76,43 @@ Example:
   Polymer({
     is: 'gallery-albums',
     properties: {
-      // USER INPUTS
-      albums: {
-        type: Array,
-        value: function() { return [] }
-      },
+      // Private Props
       _selected: {
         type: String,
         value: 'my-memories',
+      },
+      _addingAlbum: {
+        type: Boolean,
+        value: false
+      },
+      _newAlbum: {
+        type: Object,
+        value: function() { return {}; }
+      },
+      _titleMaxlength: {
+        type: Number,
+        value: 200
+      },
+
+      // USER INPUTS
+      albums: {
+        type: Array,
+        value: function() { return []; }
       },
       count: {
         type: Number,
         value: 0
       }
+    },
+    observers: [
+      '_computeButtonState(_newAlbum.title)'
+    ],
+    _charsRemaining: function(title) {
+      if (!title) return this._titleMaxlength;
+      return this._titleMaxlength - title.length;
+    },
+    _computeButtonState: function(title) {
+      this.toggleAttribute('disabled', !(title && title.length), this.$.saveButton);
     },
     _handleSelectChange: function(e) {
       if (!e || !e.detail || !e.detail.value) return;
@@ -85,6 +124,11 @@ Example:
           albumId: val
         });
       }
+    },
+    _toggleAddAlbum: function() {
+      this._newAlbum = {};
+      this._addingAlbum = !this._addingAlbum;
+      this.$.titleInput.focus();
     },
   });
 })();

@@ -12,10 +12,6 @@ ul {
   padding:0;
 }
 
-li:hover {
-  cursor: pointer;
-}
-
 .add-album {
   margin: -5px;
   padding: 10px;
@@ -75,6 +71,11 @@ li.first-item {
 .iron-selected .fs-badge {
   color: #fff;
   background: #4d4d4a;
+}
+
+.add-item-toggle:hover,
+.items-view:hover {
+  cursor: pointer;
 }
 
 .iron-selected.items-view {
