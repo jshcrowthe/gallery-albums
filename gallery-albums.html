@@ -10,6 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-selector/iron-selector.html">
 <link rel="import" href="../layout/layout.html">
+<link rel="import" href="../fs-styles/fs-styles.html">
 
 <!--
 An element providing a solution to no problem in particular.
@@ -24,24 +25,29 @@ Example:
 @hero hero.svg
 -->
 <dom-module id="gallery-albums">
+  <style include='fs-styles'></style>
   <link rel="import" type="css" href="gallery-albums.css">
   <template>
     <ul>
       <iron-selector id='selector' selected='{{_selected}}' attr-for-selected='data-uid' selectable='.items-view' on-selected-changed='_handleSelectChange'>
-        <li class='horizontal center justified items-view' data-uid='my-memories'>
-          <i class='album-icon my-memories-icon'></i>
-          <span>My Memories</span>
+        <li class='layout horizontal center justified items-view' data-uid='my-memories'>
+          <div class="layout horizontal center">
+            <i class='album-icon my-memories-icon'></i>
+            <span>My Memories</span>
+          </div>
           <span class='fs-badge'>[[count]]</span>
         </li>
-        <h1>Albums</h1>
-        <li class='horizontal center justified'>
+        <h5 class='albums-divider'>Albums</h5>
+        <li class='layout horizontal center items-view'>
           <i class="album-icon add-folder-icon"></i>
           <span>New Album</span>
         </li>
         <template is='dom-repeat' items='{{albums}}' as='album'>
-          <li class='horizontal center justified items-view' data-uid$='[[album.id]]'>
-            <i class='album-icon folder-icon'></i>
-            <span>[[album.name]]</span>
+          <li class='layout horizontal center justified items-view' data-uid$='[[album.id]]'>
+            <div class='layout horizontal center'>
+              <i class='album-icon folder-icon'></i>
+              <span>[[album.name]]</span>
+            </div>
             <span class='fs-badge'>[[album.artifactCount]]</span>
           </li>
         </template>

@@ -19,7 +19,8 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.1.0",
-    "layout": "Polymer/layout"
+    "layout": "Polymer/layout",
+    "fs-styles": "fs-webdev/fs-styles#~1.8.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

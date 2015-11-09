@@ -13,31 +13,43 @@ li:hover {
   cursor: pointer;
 }
 
+h1 {
+
+}
+
 .album-icon {
-  min-width: 18px;
-  width: 18px;
-  height:22px;
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
-  background-position: center center;
-  margin-right:5px;
+  height:22px;
+  margin-right:10px;
+  min-width: 18px;
+  width: 18px;
+}
+
+.albums-divider {
+  margin:10px 0 0;
 }
 
 .fs-badge {
+  background: #fff;
   border-radius: 9px;
   box-sizing: border-box;
+  color: #333331;
   display: inline-block;
-  font-size: 14px;
   font-size: 0.875rem;
+  font-size: 14px;
   font-weight: normal;
   line-height: 1;
   margin: 0 4px;
   min-width: 21px;
   padding: 1px 8px;
   text-shadow: none;
-  background: #fff;
-  color: #333331;
+}
+
+.items-view {
+  padding: 5px;
 }
 
 .iron-selected .fs-badge {
