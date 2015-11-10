@@ -175,6 +175,7 @@ Example:
           albumId: val
         });
       }
+      this.fire('gallery-albums-view-changed');
     },
     _sortByName: function(a, b) {
       // If both values are undefined return 0;
