@@ -23,7 +23,8 @@
     "fs-styles": "fs-webdev/fs-styles#~1.8.0",
     "fs-button": "jshcrowthe/fs-button",
     "iron-ajax": "PolymerElements/iron-ajax#~1.0.9",
-    "fs-behavior": "jshcrowthe/fs-behavior"
+    "fs-behavior": "jshcrowthe/fs-behavior",
+    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#~1.0.3"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
