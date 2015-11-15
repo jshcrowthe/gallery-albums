@@ -22,7 +22,8 @@
     "layout": "Polymer/layout",
     "fs-styles": "fs-webdev/fs-styles#~1.8.0",
     "fs-button": "jshcrowthe/fs-button",
-    "iron-ajax": "PolymerElements/iron-ajax#~1.0.9"
+    "iron-ajax": "PolymerElements/iron-ajax#~1.0.9",
+    "fs-behavior": "jshcrowthe/fs-behavior"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
